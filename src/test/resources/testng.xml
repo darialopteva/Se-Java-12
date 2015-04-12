@@ -4,7 +4,7 @@
 	<test name="Test1">
 		<parameter name="path" value="/"/>
 		<classes>
-		    <class name="ru.abbyy.lingvolive.pages.HomePageTest"/>
+		    <class name="ru.abbyy.lingvolive.LoginTest"/>
 		</classes>
 	</test>  
 </suite>
