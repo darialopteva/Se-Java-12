@@ -13,19 +13,23 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import ru.abbyy.lingvolive.util.PropertyLoader;
+
 public class LoginTest extends ru.abbyy.lingvolive.pages.TestBase {
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
 
   @Test
-  public void testUntitled() throws Exception {
+  public void testLoginToAplication() throws Exception {
     driver.get(baseUrl + "/php4dvd/");
+	String siteUsername = PropertyLoader.loadProperty("site.username");
+	String sitePassword = PropertyLoader.loadProperty("site.password");
     WebElement usernameField = driver.findElement(By.id("username"));
 	usernameField.clear();
-    usernameField.sendKeys("admin");
+    usernameField.sendKeys(siteUsername);
     WebElement passwordField = driver.findElement(By.name("password"));
 	passwordField.clear();
-    passwordField.sendKeys("admin");
+    passwordField.sendKeys(sitePassword);
     driver.findElement(By.name("submit")).click();
   }
 

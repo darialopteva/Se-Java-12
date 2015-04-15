@@ -91,6 +91,8 @@
         <browser.name>firefox</browser.name>
         <browser.version></browser.version>
         <browser.platform></browser.platform>
+		<site.username>admin</site.username>
+		<site.password>admin</site.password>		
       </properties>
       <activation>
         <activeByDefault>true</activeByDefault>
@@ -107,6 +109,8 @@
         <browser.name>ie</browser.name>
         <browser.version></browser.version>
         <browser.platform></browser.platform>
+		<site.username>admin</site.username>
+		<site.password>admin</site.password>			
       </properties>
     </profile>
     <profile>
@@ -120,6 +124,8 @@
         <browser.name>chrome</browser.name>
         <browser.version></browser.version>
         <browser.platform></browser.platform>
+		<site.username>admin</site.username>
+		<site.password>admin</site.password>			
       </properties>
     </profile>
     <profile>
