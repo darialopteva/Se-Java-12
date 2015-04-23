@@ -1,5 +1,7 @@
 package ru.abbyy.lingvolive;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
 
@@ -11,29 +13,30 @@ import static org.hamcrest.CoreMatchers.*;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import ru.abbyy.lingvolive.util.PropertyLoader;
 
-public class LoginTest extends ru.abbyy.lingvolive.pages.TestBase {
+public class DeleteFilmTest extends ru.abbyy.lingvolive.pages.TestBase {
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
 
   @Test
-  public void testLoginToApplication() throws Exception {
+  public void testDeleteFilmPositive() throws Exception {
     driver.get(baseUrl + "/php4dvd/");
-	String siteUsername = PropertyLoader.loadProperty("site.username");
-	String sitePassword = PropertyLoader.loadProperty("site.password");
-    WebElement usernameField = driver.findElement(By.id("username"));
-	usernameField.clear();
-    usernameField.sendKeys(siteUsername);
-    WebElement passwordField = driver.findElement(By.name("password"));
-	passwordField.clear();
-    passwordField.sendKeys(sitePassword);
-    driver.findElement(By.name("submit")).click();
-    Thread.sleep(200);
-    WebElement logoutButton = driver.findElement(By.xpath("/html/body/div[1]/div/header/div/nav/ul/li[4]"));
-    assertTrue(logoutButton.isDisplayed());
+    List<WebElement> films = driver.findElements(By.className("movie_box"));
+    String filmId = films.get(0).getAttribute("id");
+    films.get(0).click();
+    WebDriverWait wait = new WebDriverWait(driver,50);
+    WebElement deleteButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("img[alt=\"Remove\"]")));
+    deleteButton.click();
+    assertTrue(closeAlertAndGetItsText().matches("^Are you sure you want to remove this[\\s\\S]$"));
+    Thread.sleep(100);
+    List<WebElement> newFilms = driver.findElements(By.className("movie_box"));
+    for (WebElement element : newFilms) {
+		assertNotEquals(element.getAttribute("id"), filmId);
+	}
   }
 
   private boolean isElementPresent(By by) {

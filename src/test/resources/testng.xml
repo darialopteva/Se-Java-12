@@ -5,6 +5,9 @@
 		<parameter name="path" value="/"/>
 		<classes>
 		    <class name="ru.abbyy.lingvolive.LoginTest"/>
+		    <class name="ru.abbyy.lingvolive.AddFilmTest"/>
+		    <class name="ru.abbyy.lingvolive.DeleteFilmTest"/>		    
+		    <class name="ru.abbyy.lingvolive.SearchFilmTest"/>
 		</classes>
 	</test>  
 </suite>

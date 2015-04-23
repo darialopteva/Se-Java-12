@@ -2,12 +2,15 @@ package ru.abbyy.lingvolive.pages;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.ScreenshotException;
 import org.testng.ITestResult;
@@ -53,6 +56,15 @@ public class TestBase {
 		driver = WebDriverFactory.getInstance(gridHubUrl, browser, username,
 				password);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	}
+	
+	public boolean isElementPresent(WebElement containerElement, By locator){
+		try{
+			containerElement.findElement(locator);
+			return true;
+		} catch(NoSuchElementException e){
+			return false;
+		}
 	}
 
 	@AfterSuite(alwaysRun = true)
